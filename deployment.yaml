@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mpi-docker-service
+spec:
+  selector:
+    app: mpi-docker
+  ports:
+  - protocol: "TCP"
+    port: 8000
+    targetPort: 5000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: mpi-docker
+ labels:
+   app: mpi-docker
+spec:
+ replicas: 4
+ selector:
+   matchLabels:
+     app: mpi-docker
+ template:
+   metadata:
+     labels:
+       app: mpi-docker
+   spec:
+     containers:
+     - name: mpi-docker
+       image: gcr.io/inbound-footing-274623/mpi-docker-proyecto
+       ports:
+       - containerPort: 22
+       
+
