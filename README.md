@@ -25,7 +25,7 @@ kubectl exec [pod] -- mpiexec -f hosts -n 2 python3 example.py
 
 kubectl delete deploy mpi-docker 
 
-# ver servicios
+# Ver servicios
 
 kubectl get services
 
